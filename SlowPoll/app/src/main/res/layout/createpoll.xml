@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Button
+        android:id="@+id/buttonCreatePoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="35dp"
+        android:text="Create Poll" />
+
+    <EditText
+        android:id="@+id/optionOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textView6"
+        android:layout_alignStart="@+id/pollTitle"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:hint="Option 1"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/optionTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Option 2"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:textSize="42dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Create a Poll" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/optionOne"
+        android:layout_centerVertical="true"
+        android:text="vs."
+        android:textSize="24dp"
+        android:textColor="@android:color/background_dark" />
+
+    <EditText
+        android:id="@+id/pollTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Poll Title" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/buttonCreatePoll"
+        android:layout_below="@+id/pollTitle"
+        android:text="e.g: Battle of the Bands Final Round"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10dp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/optionTwo"
+        android:layout_below="@+id/optionTwo"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Incentive Description"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignEnd="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_below="@+id/editText"
+        android:textSize="8dp"
+        android:text='e.g. "Present proof of participation for one free drink"' />
+
+</RelativeLayout>

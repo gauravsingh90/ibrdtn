@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <!--<item
+            android:id="@+id/nav_create"
+            android:icon="@drawable/ic_create_black_24dp"
+            android:title="Create a Poll" />-->
+        <item
+            android:id="@+id/nav_browse"
+            android:icon="@drawable/ic_poll"
+            android:title="View Local Polls" />
+        <item
+            android:id="@+id/nav_archived"
+            android:icon="@drawable/ic_folder"
+            android:title="Archived Polls" />
+        <item
+            android:id="@+id/nav_credential"
+            android:icon="@drawable/ic_vpn_key"
+            android:title="Credentials" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_outline_black"
+            android:title="About" />
+    </group>
+
+
+</menu>
