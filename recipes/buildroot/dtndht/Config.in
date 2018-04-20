@@ -1,6 +1,0 @@
-config BR2_PACKAGE_DTNDHT
-	bool "dtndht"
-	select BR2_PACKAGE_OPENSSL
-	help
-	  Library to query and register to a DTN DHT.
-

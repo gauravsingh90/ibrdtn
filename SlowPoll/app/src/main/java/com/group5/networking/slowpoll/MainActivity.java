@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         Fragment fragment = null;
 
-        /*if (id == R.id.nav_create) {
+        if (id == R.id.nav_create) {
             fragment = new CreatePoll();
-        } else */if (id == R.id.nav_browse) {
+        } else if (id == R.id.nav_browse) {
             fragment = new BrowsePolls();
         } else if (id == R.id.nav_archived) {
             fragment = new ArchivedPolls();

@@ -1,4 +1,0 @@
-etc/ibrdtn/certs
-etc/ibrdtn/bpsec
-var/spool/ibrdtn
-var/log/ibrdtn
