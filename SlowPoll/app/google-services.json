@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "232513763652",
+    "firebase_url": "https://slowpoll-46624.firebaseio.com",
+    "project_id": "slowpoll-46624",
+    "storage_bucket": "slowpoll-46624.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232513763652:android:2111041f0acbb402",
+        "android_client_info": {
+          "package_name": "com.group5.networking.slowpoll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232513763652-1n4u18580qr7uqhuaik7c74bmrk7ee36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.group5.networking.slowpoll",
+            "certificate_hash": "32f146f101e05b98ef53abd0ab86835f858cb301"
+          }
+        },
+        {
+          "client_id": "232513763652-r4amarjc9g8aallh3unikredfidu80pj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT17c4KW8z8KZ2MHnLCqgscsstdB9u0ek"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232513763652-r4amarjc9g8aallh3unikredfidu80pj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -80,7 +80,7 @@
         android:textSize="10dp" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/incentive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/optionTwo"
@@ -95,9 +95,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_alignStart="@+id/editText"
-        android:layout_below="@+id/editText"
+        android:layout_alignEnd="@+id/incentive"
+        android:layout_alignStart="@+id/incentive"
+        android:layout_below="@+id/incentive"
         android:textSize="8dp"
         android:text='e.g. "Present proof of participation for one free drink"' />
 

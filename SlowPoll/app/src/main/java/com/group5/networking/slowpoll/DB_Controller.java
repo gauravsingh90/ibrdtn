@@ -19,7 +19,7 @@ public class DB_Controller extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE POLLS(ID INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, optionOne TEXT, optionTwo TEXT, responseOne INTEGER, responseTwo INTEGER);");
+        db.execSQL("CREATE TABLE POLLS(ID INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, optionOne TEXT, optionTwo TEXT, responseOne INTEGER, responseTwo INTEGER, incentive TEXT);");
     }
 
     @Override
@@ -27,13 +27,14 @@ public class DB_Controller extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS POLLS");
         onCreate(db);
     }
-    public void insert_poll(String title, String optionOne, String optionTwo){
+    public void insert_poll(String title, String optionOne, String optionTwo, String incentive){
         ContentValues cv = new ContentValues();
         cv.put("title",title);
         cv.put("optionOne",optionOne);
         cv.put("optionTwo",optionTwo);
         cv.put("responseOne", 0);
         cv.put("responseTwo", 0);
+        cv.put("incentive", incentive);
         this.getWritableDatabase().insertOrThrow("POLLS","",cv);
     }
     public void delete_poll(int id){
@@ -44,7 +45,7 @@ public class DB_Controller extends SQLiteOpenHelper {
         textView.setText("");
         int i = 1;
         while(cursor.moveToNext()){
-            textView.append(i + ". " + cursor.getString(1) + "\n\nOption 1: "+cursor.getString(2)+ "\nResponses: " + cursor.getString(4) + "\nOption 2: "+cursor.getString(3)+ "\nResponses: " + cursor.getString(5) + "\n\n");
+            textView.append(i + ". " + cursor.getString(1) + "\n\nOption 1: "+cursor.getString(2)+ "\nResponses: " + cursor.getString(4) + "\nOption 2: "+cursor.getString(3)+ "\nResponses: " + cursor.getString(5) + "\nIncentive: "+ cursor.getString(6)+"\n\n");
             i++;
         }
     }
