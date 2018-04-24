@@ -7,7 +7,8 @@
         <item
             android:id="@+id/nav_create"
             android:icon="@drawable/ic_create_black_24dp"
-            android:title="Create a Poll" />
+            android:title="Create a Poll"
+            android:visible="true"/>
         <item
             android:id="@+id/nav_browse"
             android:icon="@drawable/ic_poll"
@@ -19,7 +20,8 @@
         <item
             android:id="@+id/nav_credential"
             android:icon="@drawable/ic_vpn_key"
-            android:title="Credentials" />
+            android:title="Credentials"
+            android:visible="true"/>
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_info_outline_black"

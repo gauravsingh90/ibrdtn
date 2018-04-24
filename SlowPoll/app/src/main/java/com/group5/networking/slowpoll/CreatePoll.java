@@ -49,7 +49,6 @@ public class CreatePoll extends Fragment implements View.OnClickListener {
             public void onClick(View v) {
                 try{
                     controller.insert_poll(title.getText().toString(),optionOne.getText().toString(),optionTwo.getText().toString());
-                    //Log.w("testing", "we made it fam");
                     Toast.makeText(getActivity(), "Poll Created", Toast.LENGTH_SHORT).show();
                     Fragment fragment = new BrowsePolls();
                     FragmentTransaction ft = getFragmentManager().beginTransaction();
