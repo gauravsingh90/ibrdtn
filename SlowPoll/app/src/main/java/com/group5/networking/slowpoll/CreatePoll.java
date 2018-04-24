@@ -62,16 +62,22 @@ public class CreatePoll extends Fragment implements View.OnClickListener {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    controller.insert_poll(title.getText().toString(),optionOne.getText().toString(),optionTwo.getText().toString(), incentive.getText().toString());
-                    writeNewPoll(title.getText().toString(),optionOne.getText().toString(),optionTwo.getText().toString(), incentive.getText().toString());
-                    Toast.makeText(getActivity(), "Poll Created", Toast.LENGTH_SHORT).show();
-                    Fragment fragment = new BrowsePolls();
-                    FragmentTransaction ft = getFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_main, fragment);
-                    ft.commit();
-                }catch(SQLiteException e){
-                    Toast.makeText(getActivity(), "ALREADY EXISTS", Toast.LENGTH_SHORT).show();
+                //one line length validation
+                if((title.getText().toString().length() > 0 && title.getText().toString().length() < 140) && (optionOne.getText().toString().length() > 0 && optionOne.getText().toString().length() < 50) && (optionTwo.getText().toString().length() > 0 && optionTwo.getText().toString().length() < 50) && ( incentive.getText().toString().length() < 140)) {
+                    try {
+                        controller.insert_poll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
+                        writeNewPoll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
+                        Toast.makeText(getActivity(), "Poll Created", Toast.LENGTH_SHORT).show();
+                        Fragment fragment = new BrowsePolls();
+                        FragmentTransaction ft = getFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.commit();
+                    } catch (SQLiteException e) {
+                        Toast.makeText(getActivity(), "Unable to create poll at this time. Please try again later.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getActivity(), "Error: Either missing a required field, or input is too long. Please make sure your poll title & incentive are less than 140 characters and each option is less than 50 characters.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
