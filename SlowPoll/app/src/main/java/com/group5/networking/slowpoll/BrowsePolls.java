@@ -44,7 +44,7 @@ public class BrowsePolls extends Fragment{
 
         listview=(ListView) getActivity().findViewById(R.id.pollsListView);
         //final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_dropdown_item_1line,list);
-        final PollAdapter adapter = new PollAdapter(list, getContext(), optOneList, optTwoList);
+        final PollAdapter adapter = new PollAdapter(list, getContext(), optOneList, optTwoList, listKeys);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listview.setOnItemClickListener(

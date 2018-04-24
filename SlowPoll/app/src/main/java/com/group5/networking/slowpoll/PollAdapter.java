@@ -17,17 +17,23 @@ import java.util.ArrayList;
 
 public class PollAdapter  extends BaseAdapter implements ListAdapter {
     private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> keysList = new ArrayList<String>();
     private ArrayList<String> optOneList = new ArrayList<String>();
     private ArrayList<String> optTwoList = new ArrayList<String>();
     private Context context;
 
 
 
-    public PollAdapter(ArrayList<String> list, Context context, ArrayList<String> optOneList, ArrayList<String> optTwoList) {
+    public PollAdapter(ArrayList<String> list, Context context, ArrayList<String> optOneList, ArrayList<String> optTwoList, ArrayList<String> keysList) {
         this.list = list;
         this.context = context;
         this.optOneList = optOneList;
         this.optTwoList = optTwoList;
+        this.keysList = keysList;
+    }
+
+    public void incrementResponseValue(String title, String option){
+
     }
 
     @Override
@@ -68,14 +74,14 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
         optOneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //do something
+                incrementResponseValue(list.get(position), optOneList.get(position));
                 notifyDataSetChanged();
             }
         });
         optTwoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //do something
+                incrementResponseValue(list.get(position), optTwoList.get(position));
                 notifyDataSetChanged();
             }
         });
