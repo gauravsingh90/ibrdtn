@@ -65,13 +65,6 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
         Button optOneBtn = (Button) view.findViewById(R.id.optionOneBtn);
         optOneBtn.setText(optOneList.get(position));
 
-        optTwoBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //do something
-                notifyDataSetChanged();
-            }
-        });
         optOneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,6 +72,14 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
                 notifyDataSetChanged();
             }
         });
+        optTwoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //do something
+                notifyDataSetChanged();
+            }
+        });
+
 
         return view;
     }
