@@ -15,11 +15,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -75,7 +72,7 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
         System.out.println("INSERTED NEW POLL ENTRY. PRIMARY KEY: " + id);
     }
 
-
+    //** replace these two methods with sendBackResponseToPollLeader() when integrating DTN p2p **\\
     public void incrementResponseValueOptionOne(String key, int position){
         dref= FirebaseDatabase.getInstance().getReference().child("polls").child(key);
         int val = responseOneList.get(position);
@@ -146,6 +143,7 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
                 optOneBtn.setTextColor(Color.BLACK);
                 //save responded poll to archived poll sqlite
                 insert_entry(keysList.get(position), list.get(position), optOneList.get(position), optTwoList.get(position), responseOneList.get(position), responseTwoList.get(position), incentiveList.get(position), 1);
+                //remove poll from list after 4 seconds.
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -157,13 +155,13 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
                 notifyDataSetChanged();
             }
         });
+        //same functionality as above listener, just for second option button
         optTwoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
                 optOneBtn.setVisibility(View.GONE);
                 optTwoBtn.setEnabled(false);
                 incrementResponseValueOptionTwo(keysList.get(position), position);
-                //display incentive alert if present, otherwise toast saying thank you
                 if(incentiveList.get(position) != null && !incentiveList.get(position).toString().trim().equals("") ){
                     Toast.makeText(v.getContext(), "Thank you for participating!\n" + incentiveList.get(position).toString(), Toast.LENGTH_LONG).show();
                 }

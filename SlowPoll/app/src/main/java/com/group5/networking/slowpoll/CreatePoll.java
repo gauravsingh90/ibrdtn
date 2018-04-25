@@ -21,9 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import org.w3c.dom.Text;
 
 /**
- * Created by Joe on 4/9/2018.
  * Uses FirebaseDatabase references to push poll to database.
- * Replace writeNewPoll with relevant poll queue/broadcast method for DTN
+ * Replace writeNewPoll with relevant poll queue/broadcast method when integrating DTN
  */
 
 public class CreatePoll extends Fragment implements View.OnClickListener {
@@ -40,6 +39,7 @@ public class CreatePoll extends Fragment implements View.OnClickListener {
     }
 
     //replace functionality in this method so that poll is queued/broadcasted rather than pushed to firebase
+    //no further changes need to be made to this class
     private void writeNewPoll(String title, String optionOne, String optionTwo, String incentive) {
         Poll poll = new Poll(title, optionOne, optionTwo, incentive);
         String key = ref.child("polls").push().getKey();
