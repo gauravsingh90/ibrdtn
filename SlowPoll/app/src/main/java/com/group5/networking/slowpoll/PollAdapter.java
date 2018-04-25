@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,18 +28,23 @@ import java.util.ArrayList;
  */
 
 public class PollAdapter  extends BaseAdapter implements ListAdapter {
-    private ArrayList<String> list = new ArrayList<String>();
-    private ArrayList<String> keysList = new ArrayList<String>();
-    private ArrayList<String> optOneList = new ArrayList<String>();
-    private ArrayList<String> optTwoList = new ArrayList<String>();
-    private ArrayList<String> incentiveList = new ArrayList<String>();
-    DatabaseReference dref;
-    private Context context;
-    private ArrayList<Integer> responseOneList = new ArrayList<Integer>();
-    private ArrayList<Integer> responseTwoList = new ArrayList<Integer>();
+    //PollAdapter class is used to display polls as a list in the BrowsePolls fragment
+    //For the sake of demo, the PollAdapter holds ArrayList's of all poll's relevant data
+    //If time was not a factor, we would change this to handle a single ArrayList of Polls.
+    //We would also make the fields private.
+    public ArrayList<String> list = new ArrayList<String>();
+    public ArrayList<String> keysList = new ArrayList<String>();
+    public ArrayList<String> optOneList = new ArrayList<String>();
+    public ArrayList<String> optTwoList = new ArrayList<String>();
+    public ArrayList<String> incentiveList = new ArrayList<String>();
+    public ArrayList<Integer> responseOneList = new ArrayList<Integer>();
+    public ArrayList<Integer> responseTwoList = new ArrayList<Integer>();
     public PollController controller;
+    DatabaseReference dref;
+    public Context context;
 
 
+    //constructor to initialize arraylists
     public PollAdapter(ArrayList<String> list, Context context, ArrayList<String> optOneList, ArrayList<String> optTwoList, ArrayList<String> keysList,ArrayList<String> incentiveList, ArrayList<Integer> responseOneList, ArrayList<Integer> responseTwoList) {
         this.list = list;
         this.context = context;
@@ -50,8 +56,9 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
         this.responseTwoList = responseTwoList;
     }
 
+    //called on button click, saves the poll and user's response locally
     public void insert_entry(String id, String title, String optionOne, String optionTwo, int responseOne, int responseTwo, String incentive, int answer){
-        controller = new PollController(context);
+
         SQLiteDatabase db = controller.getWritableDatabase();
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
@@ -112,7 +119,7 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
         }
 
         //Handle TextView and display string from your list
-        TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
+        final TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);
         listItemText.setText(list.get(position));
 
         //Handle buttons and add onClickListeners
@@ -120,6 +127,7 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
        optTwoBtn.setText(optTwoList.get(position));
        final Button optOneBtn = (Button) view.findViewById(R.id.optionOneBtn);
        optOneBtn.setText(optOneList.get(position));
+        controller = new PollController(context);
 
         optOneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,20 +141,25 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
                 if(incentiveList.get(position) != null && !incentiveList.get(position).toString().trim().equals("") ){
                     Toast.makeText(v.getContext(), "Thank you for participating!\n" + incentiveList.get(position).toString(), Toast.LENGTH_LONG).show();
                 }
-                else{
-                    Toast.makeText(v.getContext(), "Thank you for participating!", Toast.LENGTH_LONG).show();
-                }
                 //make selected option background green
                 optOneBtn.setBackgroundColor(Color.parseColor ("#b3e6c9"));
                 optOneBtn.setTextColor(Color.BLACK);
                 //save responded poll to archived poll sqlite
                 insert_entry(keysList.get(position), list.get(position), optOneList.get(position), optTwoList.get(position), responseOneList.get(position), responseTwoList.get(position), incentiveList.get(position), 1);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        optOneBtn.setVisibility(View.GONE);
+                        listItemText.setVisibility(View.GONE);
+                    }
+                }, 4000);
                 notifyDataSetChanged();
             }
         });
         optTwoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View v) {
                 optOneBtn.setVisibility(View.GONE);
                 optTwoBtn.setEnabled(false);
                 incrementResponseValueOptionTwo(keysList.get(position), position);
@@ -157,11 +170,20 @@ public class PollAdapter  extends BaseAdapter implements ListAdapter {
                 optTwoBtn.setBackgroundColor(Color.parseColor ("#b3e6c9"));
                 optTwoBtn.setTextColor(Color.BLACK);
                 insert_entry(keysList.get(position), list.get(position), optOneList.get(position), optTwoList.get(position), responseOneList.get(position), responseTwoList.get(position), incentiveList.get(position), 2);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        optTwoBtn.setVisibility(View.GONE);
+                        listItemText.setVisibility(View.GONE);
+                    }
+                }, 4000);
                 notifyDataSetChanged();
+
             }
         });
 
-
         return view;
     }
+
 }

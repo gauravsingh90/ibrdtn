@@ -13,7 +13,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="35dp"
-        android:text="Create Poll" />
+        android:text="Broadcast Poll" />
 
     <EditText
         android:id="@+id/optionOne"

@@ -14,12 +14,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public CredentialController controller;
-
+    public Button browseButton;
     public boolean isAdmin(){
         SQLiteDatabase db = controller.getReadableDatabase();
         Cursor cursor = db.query(
@@ -46,7 +48,18 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         controller = new CredentialController(getBaseContext());
-
+        browseButton = (Button) findViewById(R.id.goToBrowse);
+        browseButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                browseButton.setVisibility(View.GONE);
+                Fragment fragment = new BrowsePolls();
+                if(fragment != null){
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.content_main, fragment);
+                    ft.commit();
+                }
+            }
+        });
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -106,6 +119,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Fragment fragment = null;
+        browseButton.setVisibility(View.GONE);
+
         if (id == R.id.nav_create ) {
             fragment = new CreatePoll();
         } else if (id == R.id.nav_browse) {

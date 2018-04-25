@@ -65,7 +65,6 @@ public class CreatePoll extends Fragment implements View.OnClickListener {
                 //one line length validation
                 if((title.getText().toString().length() > 0 && title.getText().toString().length() < 140) && (optionOne.getText().toString().length() > 0 && optionOne.getText().toString().length() < 50) && (optionTwo.getText().toString().length() > 0 && optionTwo.getText().toString().length() < 50) && ( incentive.getText().toString().length() < 140)) {
                     try {
-                        //controller.insert_poll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
                         writeNewPoll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
                         Toast.makeText(getActivity(), "Poll Created", Toast.LENGTH_SHORT).show();
                         Fragment fragment = new BrowsePolls();

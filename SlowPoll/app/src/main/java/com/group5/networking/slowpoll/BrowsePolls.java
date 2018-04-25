@@ -2,6 +2,7 @@ package com.group5.networking.slowpoll;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -37,15 +38,12 @@ public class BrowsePolls extends Fragment{
     ArrayList<String> optTwoList = new ArrayList<String>();
     ArrayList<String> listKeys = new ArrayList<String>();
     ArrayList<String> incentiveList = new ArrayList<String>();
-    private ArrayList<Integer> responseOneList = new ArrayList<Integer>();
-    private ArrayList<Integer> responseTwoList = new ArrayList<Integer>();
+    public ArrayList<Integer> responseOneList = new ArrayList<Integer>();
+    public ArrayList<Integer> responseTwoList = new ArrayList<Integer>();
     public PollController controller;
-    private int selectedPosition = 0;
-    private Boolean itemSelected = false;
     Button refreshButton;
 
     private boolean NotPresentInLocalDatabase(String key) {
-        controller = new PollController(getContext());
         SQLiteDatabase db = controller.getReadableDatabase();
         String selection = DatabaseContract.PollEntry._ID + " = ?";
         String[] selectionArgs = { key };
@@ -71,13 +69,15 @@ public class BrowsePolls extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         getActivity().setTitle("Browse Local Polls");
+        controller = new PollController(getContext());
         refreshButton = (Button) getActivity().findViewById(R.id.refreshPolls);
         listview=(ListView) getActivity().findViewById(R.id.pollsListView);
         final PollAdapter adapter = new PollAdapter(list, getContext(), optOneList, optTwoList, listKeys, incentiveList, responseOneList, responseTwoList);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        listview.setDivider(null);
+        listview.setDividerHeight(0);
 
         dref= FirebaseDatabase.getInstance().getReference().child("polls");
         dref.addChildEventListener(new ChildEventListener() {
@@ -117,7 +117,6 @@ public class BrowsePolls extends Fragment{
             @Override
             public void onChildMoved(DataSnapshot dataSnapshot, String s) {
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -128,7 +127,7 @@ public class BrowsePolls extends Fragment{
             @Override
             public void run() {
                 if(list.size() == 0){
-                    Toast.makeText(getContext(), "Looks like there are no local polls. Please check back later!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Looks like there are no local polls at this time. Please check back later!", Toast.LENGTH_LONG).show();
                 }
             }
         }, 2000);
