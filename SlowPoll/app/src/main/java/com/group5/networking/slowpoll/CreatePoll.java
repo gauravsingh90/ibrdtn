@@ -27,7 +27,7 @@ import org.w3c.dom.Text;
 public class CreatePoll extends Fragment implements View.OnClickListener {
 
     public EditText title, optionOne, optionTwo, incentive;
-    public DB_Controller controller;
+    public PollController controller;
     public Button button;
     public FirebaseDatabase database;
     DatabaseReference ref;
@@ -57,7 +57,7 @@ public class CreatePoll extends Fragment implements View.OnClickListener {
         incentive = (EditText) getView().findViewById(R.id.incentive);
         button = (Button) getView().findViewById(R.id.buttonCreatePoll);
         //textView = (TextView) getView().findViewById(R.id.listAllPolls);
-        controller = new DB_Controller(getActivity(), "",null, 1);
+        controller = new PollController(getContext());
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +65,7 @@ public class CreatePoll extends Fragment implements View.OnClickListener {
                 //one line length validation
                 if((title.getText().toString().length() > 0 && title.getText().toString().length() < 140) && (optionOne.getText().toString().length() > 0 && optionOne.getText().toString().length() < 50) && (optionTwo.getText().toString().length() > 0 && optionTwo.getText().toString().length() < 50) && ( incentive.getText().toString().length() < 140)) {
                     try {
-                        controller.insert_poll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
+                        //controller.insert_poll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
                         writeNewPoll(title.getText().toString(), optionOne.getText().toString(), optionTwo.getText().toString(), incentive.getText().toString());
                         Toast.makeText(getActivity(), "Poll Created", Toast.LENGTH_SHORT).show();
                         Fragment fragment = new BrowsePolls();

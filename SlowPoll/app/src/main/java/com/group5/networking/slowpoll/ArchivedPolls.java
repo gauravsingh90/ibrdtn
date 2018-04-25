@@ -20,9 +20,9 @@ import org.w3c.dom.Text;
  */
 
 public class ArchivedPolls extends Fragment implements View.OnClickListener {
-    public DB_Controller controller;
+    public PollController controller;
     public TextView textView;
-    public Button deletePollsButton;
+    public Button clearPollsButton;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,16 +33,15 @@ public class ArchivedPolls extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Archived Polls");
         textView = (TextView) getView().findViewById(R.id.listAllPolls);
-        deletePollsButton = (Button) getView().findViewById(R.id.deleteAllPolls);
-        controller = new DB_Controller(getActivity(), "",null, 1);
-        controller.list_all_polls(textView);
+        clearPollsButton = (Button) getView().findViewById(R.id.deleteAllPolls);
+        controller = new PollController(getContext());
 
-        deletePollsButton.setOnClickListener(new View.OnClickListener() {
+        clearPollsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try{
                     //Log.w("testing", "we made it fam");
-                    controller.delete_all_polls();
+                    //controller.delete_all_polls();
                     Toast.makeText(getActivity(), "Records Deleted", Toast.LENGTH_SHORT).show();
                     Fragment fragment = new ArchivedPolls();
                     FragmentTransaction ft = getFragmentManager().beginTransaction();

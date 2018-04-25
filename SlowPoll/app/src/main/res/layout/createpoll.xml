@@ -23,7 +23,7 @@
         android:layout_alignStart="@+id/pollTitle"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Option 1"
+        android:hint="Option 1*"
         android:inputType="textPersonName" />
 
     <EditText
@@ -34,7 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="Option 2"
+        android:hint="Option 2*"
         android:inputType="textPersonName" />
 
     <TextView
@@ -67,7 +67,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:hint="Poll Title" />
+        android:hint="Poll Title*" />
 
     <TextView
         android:id="@+id/textView9"
