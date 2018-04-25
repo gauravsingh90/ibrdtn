@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 /**
  * Created by Joe on 4/9/2018.
+ * Uses Firebase Database to fetch local polls,
+ * needs modifying when implementing actual p2p communication
  */
 
 public class BrowsePolls extends Fragment{

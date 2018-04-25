@@ -27,7 +27,10 @@ import java.util.ArrayList;
 
 /**
  * Created by Joe on 4/24/2018.
+ * Entire class works offline using local storage - no Firebase connections initialized
  */
+
+
 
 public class ArchivedPollAdapter  extends BaseAdapter implements ListAdapter {
     public ArrayList<String> list = new ArrayList<String>();
@@ -35,12 +38,11 @@ public class ArchivedPollAdapter  extends BaseAdapter implements ListAdapter {
     public ArrayList<String> optOneList = new ArrayList<String>();
     public ArrayList<String> optTwoList = new ArrayList<String>();
     public ArrayList<String> incentiveList = new ArrayList<String>();
-    DatabaseReference dref;
-    public Context context;
     public ArrayList<Integer> responseOneList = new ArrayList<Integer>();
     public ArrayList<Integer> responseTwoList = new ArrayList<Integer>();
     public ArrayList<Integer> answeredList = new ArrayList<Integer>();
     public PollController controller;
+    public Context context;
 
 
     public ArchivedPollAdapter(ArrayList<String> list, Context context, ArrayList<String> optOneList, ArrayList<String> optTwoList, ArrayList<String> keysList,ArrayList<String> incentiveList, ArrayList<Integer> responseOneList, ArrayList<Integer> responseTwoList, ArrayList<Integer> answeredList) {
@@ -80,6 +82,8 @@ public class ArchivedPollAdapter  extends BaseAdapter implements ListAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.single_archived_poll_list, null);
         }
+
+        //local database connection
         controller = new PollController(context);
         //Handle TextView and display string from your list
         TextView listItemText = (TextView) view.findViewById(R.id.list_item_string);

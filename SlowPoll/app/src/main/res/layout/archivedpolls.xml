@@ -24,19 +24,8 @@
 
         </ListView>
 
-    <Button
-    android:id="@+id/deleteAllPolls"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:backgroundTint="@color/colorPrimaryDark"
-    android:paddingBottom="20dp"
-    android:paddingTop="20dp"
-    android:text="Clear Polls"
-    android:textColor="@android:color/background_light" />
 
-
-</RelativeLayout>
+    </RelativeLayout>
 
 
 </ScrollView>
