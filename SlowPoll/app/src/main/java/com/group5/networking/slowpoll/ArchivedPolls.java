@@ -17,12 +17,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
@@ -34,7 +28,6 @@ import java.util.ArrayList;
 
 public class ArchivedPolls extends Fragment implements View.OnClickListener {
 
-    DatabaseReference dref;
     ListView listview;
     ArrayList<String> list=new ArrayList<String>();
     ArrayList<String> optOneList = new ArrayList<String>();

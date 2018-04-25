@@ -1,27 +1,41 @@
 package com.group5.networking.slowpoll;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener  {
 
     public CredentialController controller;
     public Button browseButton;
+    private LocationManager locationManager;
+    private Location onlyOneLocation;
+    private final int REQUEST_FINE_LOCATION = 1234;
+
+
+
     public boolean isAdmin(){
         SQLiteDatabase db = controller.getReadableDatabase();
         Cursor cursor = db.query(
@@ -45,6 +59,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         controller = new CredentialController(getBaseContext());
@@ -142,5 +158,30 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
 
         return true;
+    }
+
+    @Override public void onLocationChanged(Location location) {
+        onlyOneLocation = location;
+        locationManager.removeUpdates(this);
+    }
+    @Override public void onStatusChanged(String provider, int status, Bundle extras) { }
+    @Override public void onProviderEnabled(String provider) { }
+    @Override public void onProviderDisabled(String provider) { }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d("gps", "Location permission granted");
+                    try {
+                        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+                        locationManager.requestLocationUpdates("gps", 0, 0, this);
+                    } catch (SecurityException ex) {
+                        Log.d("gps", "Location permission did not work!");
+                    }
+                }
+                break;
+        }
     }
 }

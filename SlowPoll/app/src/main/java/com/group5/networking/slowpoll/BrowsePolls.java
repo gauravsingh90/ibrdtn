@@ -71,7 +71,7 @@ public class BrowsePolls extends Fragment{
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Browse Local Polls");
+        getActivity().setTitle("View Local Polls");
         controller = new PollController(getContext());
         refreshButton = (Button) getActivity().findViewById(R.id.refreshPolls);
         listview=(ListView) getActivity().findViewById(R.id.pollsListView);
@@ -86,7 +86,7 @@ public class BrowsePolls extends Fragment{
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 //if poll is not in archived polls sqlite
-                if(NotPresentInLocalDatabase(dataSnapshot.getKey())) {
+                if(NotPresentInLocalDatabase(dataSnapshot.getKey()) ) {
                     list.add(dataSnapshot.child("title").getValue(String.class));
                     optOneList.add(dataSnapshot.child("optionOne").getValue(String.class));
                     optTwoList.add(dataSnapshot.child("optionTwo").getValue(String.class));
